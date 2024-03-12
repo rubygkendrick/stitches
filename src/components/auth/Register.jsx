@@ -6,7 +6,8 @@ import { createUser, getUserByEmail } from "../../services/userService"
 export const Register = (props) => {
   const [customer, setCustomer] = useState({
     email: "",
-    fullName: ""
+    fullName: "",
+    skillLevelId: 1
   })
   let navigate = useNavigate()
 
@@ -17,6 +18,7 @@ export const Register = (props) => {
           "honey_user",
           JSON.stringify({
             id: createdUser.id,
+           
           })
         )
 
@@ -46,8 +48,8 @@ export const Register = (props) => {
 
   return (
     <main style={{ textAlign: "center" }}>
-        <h1>Stitches</h1>
-      <form className="form-login" onSubmit={handleRegister}>
+        <h1 className="logo">Stitches</h1>
+      <form className="form-login" >
         
         <h2>Register</h2>
         <fieldset>
@@ -79,7 +81,9 @@ export const Register = (props) => {
       </form>
       <fieldset>
           <div className="form-group">
-            <button className="login-btn btn-primary" type="submit">
+            <button className="login-btn btn-primary" 
+            type="submit"
+            onClick={handleRegister}>
               Let's Stitch
             </button>
           </div>

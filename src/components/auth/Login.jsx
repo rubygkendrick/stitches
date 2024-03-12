@@ -32,7 +32,7 @@ export const Login = () => {
 
     return (
         <main className="container-login">
-            <h1>Stitches</h1>
+            <h1 className="logo">Stitches</h1>
             <section>
                 <form className="form-login" onSubmit={handleLogin}>
                     <h2>Login</h2>
@@ -49,13 +49,13 @@ export const Login = () => {
                             />
                         </div>
                     </fieldset>
-                    <div className="form-group form-control">
+                    <div className="form-group">
                         <section>
                             or
                         </section>
                     </div>
                     <fieldset>
-                        <div className="form-group">
+                        <div className="form-group" >
                             <section>
                                 <Link to="/register">Register</Link>
                             </section>
@@ -65,13 +65,14 @@ export const Login = () => {
                 </form>
             </section>
             <fieldset>
-                <div className="form-group">
-                    <button className="login-btn btn-primary" type="submit">
+                <div className="form-group" >
+                    <button className="login-btn btn-primary" 
+                    type="submit"
+                    onClick={handleLogin}>
                         Let's Stitch!
                     </button>
                 </div>
             </fieldset>
-
         </main>
     )
 }

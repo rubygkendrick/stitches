@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import "./App.css"
-
+import React from "react"
 import { Login } from "./components/auth/Login"
 import { Register } from "./components/auth/Register"
 import { Authorized } from "./views/Authorized"
@@ -14,8 +14,8 @@ export const App = () => {
       <Route path="/register" element={<Register />} />
 
       <Route path="*" element={
-        <Authorized> {/* checks if user is authorized */}
-          <ApplicationViews /> {/* if user is authorized this child component renders the views*/}
+        <Authorized> 
+          <ApplicationViews /> 
         </Authorized>
       }>
       </Route>

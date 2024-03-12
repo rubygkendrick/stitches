@@ -10,15 +10,17 @@ font-family: "Roboto", sans-serif;
 /* COLOR PALETTE */
 /* Feel free to change these values and create your own color palette! https://coolors.co/ is a great resource */
 :root {
-  --primary: #8549A7;
-  --secondary:#A86ADD;
-  --info: #DEB7FF;
+  --primary: #927F54;
+  --secondary: #E5DABE;
+  --info: #5A4C2A;
   --warning: #efb814;
   --white: #ffffff;
-  --offWhite: #f2f2f3;
-  --dark: #4d2f6b;
-  --outline: #e7cbfd;
-  --appBackground:#fcfaf3;
+  --offWhite: #F3EBD7;
+  --dark: #927F54;
+  --outline: #927F54;
+
+  --appBackground: #f2f2f3;
+
 }
 
 /* GLOBAL STYLES */
@@ -31,8 +33,11 @@ textarea {
 }
 
 body {
+
   background-color: var(--appBackground);
-  margin: 0;
+  background-image: url("images/background.jpeg");
+  background-size: cover;
+
 }
 
 h1,
@@ -49,10 +54,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
 /* This prevents all the links in the app from turning purple after visiting */
 a:visited {
   color: inherit;
 }
+
 /* This prevents all the inputs in the app from having that blue outline when in focus */
 input:focus {
   outline: none;
@@ -65,6 +72,8 @@ button {
   border-radius: 0.5rem;
   color: var(--white);
   cursor: pointer;
+  box-shadow: 1px 2px 5px #5A4C2A;
+  border: 1px solid var(--info);
 }
 
 /* These are all the color options for the buttons */
@@ -74,7 +83,7 @@ button {
 }
 
 .btn-primary:hover {
-  background-color: #e5a000;
+  background-color: #5A4C2A;
 }
 
 .btn-secondary {
@@ -82,7 +91,7 @@ button {
 }
 
 .btn-secondary:hover {
-  background-color: #0097d7;
+  background-color: #5A4C2A;
 }
 
 .btn-warning {
@@ -90,7 +99,7 @@ button {
 }
 
 .btn-warning:hover {
-  background-color: #e14617;
+  background-color: #5A4C2A;
 }
 
 .btn-info {
@@ -98,6 +107,22 @@ button {
 }
 
 .btn-info:hover {
-  background-color: #71a500;
+  background-color: #5A4C2A
 }
 
+.logo {
+  margin: 4rem auto;
+  margin-bottom: 3rem;
+  color:#5A4C2A;
+  width: 20%;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid var(--outline);
+  background-color:var(--offWhite);
+  border-radius: 20px;
+  box-shadow: 1px 2px 5px #5A4C2A;
+}
+
+a:hover {
+ color: var(--white);
+}
