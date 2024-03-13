@@ -3,7 +3,8 @@ import { useState, useEffect } from "react"
 import { Outlet, Route, Routes } from "react-router-dom"
 import { Welcome } from "../components/welcome/Welcome"
 import { Nav } from "../components/nav/Nav"
-import { CreateKitForm } from "../components/forms/Create/CreateKitForm"
+import { KitForm } from "../components/forms/Create/KitForm"
+import { KitDetails } from "../components/Kits/KitDetails"
 
 
 export const ApplicationViews = () => {
@@ -25,9 +26,11 @@ export const ApplicationViews = () => {
             <Route index element={<Welcome />} />
             <Route path="kits" element={<>Kits</>}></Route>
             <Route path="myKits" element={<>My Kits</>}></Route>
-            <Route path="create" element={<CreateKitForm currentUser={currentUser} />}></Route>
+            <Route path="createKit" element={<KitForm currentUser={currentUser} />}></Route>
+            <Route path="editKit" element={<KitForm currentUser={currentUser} />}></Route>
             <Route path="favorites" element={<>Favorites</>}></Route>
             <Route path="profile" element={<>Profile</>}></Route>
+            <Route path="kitDetails/:kitId" element={<KitDetails currentUser={currentUser}/>}></Route>
         </Route>
         
     </Routes>

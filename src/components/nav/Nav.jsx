@@ -16,7 +16,7 @@ export const Nav = () => {
                 <Link to="/myKits">My Kits</Link>
             </li>
             <li className="navbar-item">
-                <Link to="/create">Create</Link>
+                <Link to="/createKit">Create</Link>
             </li>
             <li className="navbar-item">
                 <Link to="/favorites">Favorites</Link>

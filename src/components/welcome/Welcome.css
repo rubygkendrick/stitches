@@ -7,7 +7,7 @@
     border: 1px solid var(--outline);
     background-color:var(--offWhite);
     border-radius: 20px;
-    box-shadow: 1px 2px 5px #5A4C2A;
+    box-shadow: 1px 2px 5px #999999;
   }
   
   /* This targets any h1 that is a child of an element with the .welcome-container class */

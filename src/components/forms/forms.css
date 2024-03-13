@@ -1,5 +1,5 @@
 form {
-    margin: 3rem 5rem;
+    margin: 3.5rem 13rem;
     border: 1px solid var(--outline);
     border-radius: 50px;
     padding: 3.5rem 0rem 3.5rem 0rem;
@@ -66,7 +66,7 @@ fieldset {
 
 .form-btn {
     align-self: center;
-
+    margin-bottom:10rem;
 }
 
 .form-btn:focus {
