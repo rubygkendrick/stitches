@@ -10,7 +10,7 @@ export const Welcome = () => {
                 <h2><span>Design, Save, Share with Stitches!</span></h2>
             </div>
             < div>
-                <Link to="create">
+                <Link to="createKit">
                     <button className="btn-primary">Create A Kit</button>
                 </Link>
             </div>

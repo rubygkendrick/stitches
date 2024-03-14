@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import "../forms.css"
-import { createNewKit, createNewKitStitch, getAllStitches } from "../../../services/kitService"
-import { useNavigate} from "react-router-dom"
+import { createNewKit, createNewKitStitch, getAllStitches, getKitByKitId } from "../../../services/kitService"
+import { useNavigate, useParams } from "react-router-dom"
 
 export const KitForm = ({ currentUser }) => {
+    const navigate = useNavigate()
+    const {kitId} = useParams()
     const [allStitches, setAllStitches] = useState([])
     const [newKitStitchIds, setNewKitStitchIds] = useState([])
-    
-    const navigate = useNavigate()
-
+    const [currentKit, setCurrentKit] = useState({})
     const [kit, setKit] = useState({
         id: 1,
         title: "",
@@ -25,6 +25,13 @@ export const KitForm = ({ currentUser }) => {
         skillLevelId: 0,
         completedPhoto: ""
     })
+          
+    useEffect(() => {
+        getKitByKitId(parseInt(kitId)).then(kitArray =>
+            setCurrentKit(kitArray[0])
+        )
+    }, [kitId])
+
 
     useEffect(() => {
         getAllStitches().then(stitchArray => {
@@ -34,6 +41,7 @@ export const KitForm = ({ currentUser }) => {
 
     const handleNewKit = (event) => {
         event.preventDefault()
+        
         if (newKitStitchIds.length !== 0 &&
             kit.title &&
             kit.description &&
@@ -57,9 +65,18 @@ export const KitForm = ({ currentUser }) => {
                 completedPhoto: ""
 
             }
-            createNewKit(newKit).then(() => {
-                handleNewKitStitches()
-                navigate(`/kitDetails/${newKit.id}`)   
+
+            createNewKit(newKit).then((createdKit) => {
+                const newKitId = createdKit.id
+                console.log(createdKit)
+                newKitStitchIds.forEach(stitchId => {
+                    const newKitStitch = {
+                        stitchId: parseInt(stitchId),
+                        kitId: newKitId
+                    }
+                    createNewKitStitch(newKitStitch)
+                })
+                navigate("/myKits")   ///this is a disaster
             })
 
         } else {
@@ -69,36 +86,30 @@ export const KitForm = ({ currentUser }) => {
     }
 
     const handleCheckBoxChange = (event) => {
-        const value = event.target.value
-        setNewKitStitchIds([...newKitStitchIds, value])
-
+        const value = event.target.value;
+        const isChecked = event.target.checked;
+        if (isChecked) {
+            setNewKitStitchIds([...newKitStitchIds, value])
+        } else {
+            setNewKitStitchIds(newKitStitchIds.filter(id => id !== value))
+        }
     }
 
-    const handleNewKitStitches = () => {
-        newKitStitchIds.forEach(stitchId => {
-            const newKitStitch = {
-                stitchId: parseInt(stitchId),
-                kitId: kit.id
-            };
-            createNewKitStitch(newKitStitch);
-        });
-    };
-
-
-
-    return (
+    return ( 
         <div>
-            <h1 className="logo">Create a Kit</h1>
+            {currentKit? "" : <h1 className="logo">Create a Kit</h1>}
+            
             <form>
                 <fieldset>
                     <div className="form-group">
                         <input
                             type="text"
                             className="form-control"
+                            value= {currentKit.title || ""}
                             placeholder="title"
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
-                                kitCopy.title = event.target.value
+                                kitCopy.title = event.target.value 
                                 setKit(kitCopy)
                             }}
                         />
@@ -106,9 +117,10 @@ export const KitForm = ({ currentUser }) => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <input
+                        <textarea
                             type="text"
                             className="form-control-larger"
+                            value= {currentKit.description || ""}
                             placeholder="brief description"
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
@@ -125,6 +137,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
+                                value= {currentKit.color1 || ""}
                                 placeholder="color"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -135,6 +148,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
+                                value={currentKit.color2 || ""}
                                 placeholder="color"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -144,6 +158,7 @@ export const KitForm = ({ currentUser }) => {
                             />  <input
                                 type="text"
                                 className="form-color"
+                                value={currentKit.color3 || ""}
                                 placeholder="color"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -180,7 +195,8 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                placeholder="domainant"
+                                value={currentKit.strandDominant || ""}
+                                placeholder="dominant"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
                                     kitCopy.strandDominant = event.target.value
@@ -190,6 +206,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
+                                value={currentKit.strandSecondary || ""}
                                 placeholder="secondary"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -199,6 +216,7 @@ export const KitForm = ({ currentUser }) => {
                             />  <input
                                 type="text"
                                 className="form-color"
+                                value={currentKit.strandTertiary || ""}
                                 placeholder="tertiary"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -211,25 +229,26 @@ export const KitForm = ({ currentUser }) => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <select className="form-control dropdown" defaultValue="0"
+                        <select className="form-control dropdown" defaultValue={"0"}
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
                                 kitCopy.skillLevelId = event.target.value
                                 setKit(kitCopy)
                             }}  >
-                            <option value="0" disabled >Skill Level</option>
-                            <option value={1}>Beginner</option>
-                            <option value={2}>Intermediate</option>
-                            <option value={3}>Advanced</option>
+                            <option value={0} disabled >{currentKit.skillLevel?.level || "Skill Level" }</option> 
+                            <option value={currentKit.skillLevelId || 1}>Beginner</option>
+                            <option value={currentKit.skillLevelId || 2}>Intermediate</option>
+                            <option value={currentKit.skillLevelId || 3}>Advanced</option>
                         </select>
                     </div>
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <input
+                        <textarea
                             type="text"
                             className="form-control-larger"
-                            placeholder="notes"
+                            value={currentKit.notes || ""}
+                            placeholder={"notes"}
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
                                 kitCopy.notes = event.target.value
@@ -240,10 +259,11 @@ export const KitForm = ({ currentUser }) => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <input
+                        <textarea
                             type="text"
                             className="photoInput"
-                            placeholder="image URL"
+                            value={currentKit.pattern || "image URL"}
+                            placeholder=""
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
                                 kitCopy.pattern = event.target.value

@@ -12,8 +12,9 @@ export const createNewKit = (newKit) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(newKit),
-    })
+    }).then((res) => res.json())
 }
+
 
 export const createNewKitStitch = (stitch) => {
     return fetch(`http://localhost:8088/kitStitches`, {
@@ -26,6 +27,19 @@ export const createNewKitStitch = (stitch) => {
 }
 
 export const getKitByKitId = (kitId) => {
-    return fetch(`http://localhost:8088/kits?kitId=${kitId}&&_expand=skillLevel&&_embed=kitStitches`).then(res => res.json())
+    return fetch(`http://localhost:8088/kits?id=${kitId}&&_expand=skillLevel&&_embed=kitStitches`).then(res => res.json())
 }
 
+export const createNewKitFavorite = (favoriteObject) => {
+    return fetch(`http://localhost:8088/kitFavorite`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(favoriteObject),
+    })
+}
+
+export const getAllKits = () => {
+    return fetch("http://localhost:8088/kits?&&_expand=skillLevel&&_embed=kitFavorite").then((res) => res.json())
+}

@@ -1,0 +1,25 @@
+.favorites-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.kit-container {
+    margin: 4rem auto;
+    height: 50%;
+    width: 33%;
+    text-align: center;
+    padding: 3rem 1rem;
+    border: 1px solid var(--outline);
+    background-color:var(--offWhite);
+    border-radius: 20px;
+    box-shadow: 1px 2px 5px #999999;
+}
+
+.kit-image{
+    margin-top: 1rem;
+    width: 11rem;
+    height: 9rem;
+    align-self: center;
+    border: 1px solid var(--outline);
+    border-radius: 15px;
+}

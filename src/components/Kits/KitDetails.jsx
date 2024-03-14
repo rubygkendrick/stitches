@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getAllStitches, getKitByKitId } from "../../services/kitService";
+import { useNavigate, useParams } from "react-router-dom";
+import { createNewKitFavorite, getAllStitches, getKitByKitId } from "../../services/kitService";
 import "./KitDetails.css"
 
 export const KitDetails = ({ currentUser }) => {
     const { kitId } = useParams()
     const [kit, setKit] = useState({})
     const [allStitches, setAllStitches] = useState([])
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         getAllStitches().then(stitchArray => {
@@ -15,15 +17,28 @@ export const KitDetails = ({ currentUser }) => {
     }, [])
 
     useEffect(() => {
-        getKitByKitId(kitId).then(kitArray =>
+        getKitByKitId(parseInt(kitId)).then(kitArray =>
             setKit(kitArray[0])
 
         )
-        console.log(kitId)
     }, [kitId])
+   
+    const handleEditClick = () => {
+        navigate(`/editKit/${kit.id}`)
+    }
 
+    const handleFavoritesClick = () => {
+        const newFavorite = {
+            userId: currentUser.id,
+            kitId: kit.id
+        }
+        createNewKitFavorite(newFavorite).then(() => {
+            navigate("/favorites")
+        })
 
-    return (kit.id === parseInt(kitId) ? (
+    }
+
+    return (
         <>
             <div className="detail-container">
                 <h2>{kit.title}</h2>
@@ -60,12 +75,13 @@ export const KitDetails = ({ currentUser }) => {
                 <p>{kit.notes}</p>
             </div>
             {currentUser.id == kit.userId ? (
-                <button className="btn-primary detail-btn">Edit</button>
-            ) : <button className="btn-primary detail-btn">Add to Favorites</button>}
+                <button className="btn-primary detail-btn"
+                    onClick={handleEditClick}
+                >Edit</button>
+            ) : <button className="btn-primary detail-btn"
+                onClick={handleFavoritesClick}
+            >Add to Favorites</button>}
         </>
-    ) : (
-        ""
     )
 
-    )
 }
