@@ -10,6 +10,10 @@ export const getKitByKitId = (kitId) => {
     return fetch(`http://localhost:8088/kits?id=${kitId}&_expand=skillLevel&_embed=kitStitches`).then(res => res.json())
 }
 
+export const getAllKitStitches = () => {
+    return fetch("http://localhost:8088/kitStitches").then((res) => res.json())
+}
+
 
 
 export const createNewKit = (newKit) => {
@@ -33,18 +37,15 @@ export const createNewKitStitch = (stitch) => {
     })
 }
 
-export const editKitStitch = (stitch, kitId) => {
-    return fetch(`http://localhost:8088/kitStitches?kitId=${kitId}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(stitch),
+export const deleteKitStitch = (id) => {
+    return fetch(`http://localhost:8088/kitStitches/${id}`, {
+        method: "DELETE"
+        
     })
 }
 
 export const editKit = (kit, kitId) => {
-    return fetch(`http://localhost:8088/kits?id=${kitId}`, {
+    return fetch(`http://localhost:8088/kits/${kitId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
