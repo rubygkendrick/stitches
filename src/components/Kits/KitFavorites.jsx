@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import "./Kits.css"
 import { getAllKits } from "../../services/kitService"
+import { Link } from "react-router-dom"
 
 export const KitFavorites = ({ currentUser }) => {
 
@@ -28,7 +29,7 @@ export const KitFavorites = ({ currentUser }) => {
         <div className="favorites-container">
             {favorites.map((kit) => (
                 <div key={kit.id} className="kit-container">
-                    <h2>{kit.title}</h2>
+                    <Link to={`/kitDetails/${kit.id}`} ><h2>{kit.title}</h2></Link>
 
                     {kit.completedPhoto ? (
                         <img

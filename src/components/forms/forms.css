@@ -67,7 +67,12 @@ fieldset {
 
 .form-btn {
     align-self: center;
+    margin-bottom: 3rem;
+}
+.form-btn-main {
+    align-self: center;
     margin-bottom:10rem;
+    
 }
 
 .form-btn:focus {
@@ -119,6 +124,7 @@ legend {
     border: 1px solid var(--outline);
     border-radius: .5rem;
     word-wrap: break-word;
+    margin-top: 2rem;
     
 }
 

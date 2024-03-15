@@ -1,8 +1,15 @@
-
+export const getAllKits = () => {
+    return fetch("http://localhost:8088/kits?&_expand=skillLevel&_embed=kitFavorite").then((res) => res.json())
+}
 
 export const getAllStitches = () => {
     return fetch("http://localhost:8088/stitches").then((res) => res.json())
 }
+
+export const getKitByKitId = (kitId) => {
+    return fetch(`http://localhost:8088/kits?id=${kitId}&_expand=skillLevel&_embed=kitStitches`).then(res => res.json())
+}
+
 
 
 export const createNewKit = (newKit) => {
@@ -26,9 +33,26 @@ export const createNewKitStitch = (stitch) => {
     })
 }
 
-export const getKitByKitId = (kitId) => {
-    return fetch(`http://localhost:8088/kits?id=${kitId}&&_expand=skillLevel&&_embed=kitStitches`).then(res => res.json())
+export const editKitStitch = (stitch, kitId) => {
+    return fetch(`http://localhost:8088/kitStitches?kitId=${kitId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(stitch),
+    })
 }
+
+export const editKit = (kit, kitId) => {
+    return fetch(`http://localhost:8088/kits?id=${kitId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(kit),
+    }).then((res) => res.json())
+}
+
 
 export const createNewKitFavorite = (favoriteObject) => {
     return fetch(`http://localhost:8088/kitFavorite`, {
@@ -40,6 +64,9 @@ export const createNewKitFavorite = (favoriteObject) => {
     })
 }
 
-export const getAllKits = () => {
-    return fetch("http://localhost:8088/kits?&&_expand=skillLevel&&_embed=kitFavorite").then((res) => res.json())
-}
+
+
+
+
+
+
