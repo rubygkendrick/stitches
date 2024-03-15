@@ -105,7 +105,7 @@ export const KitForm = ({ currentUser }) => {
                         <input
                             type="text"
                             className="form-control"
-                            value= {currentKit.title || ""}
+                            value= {currentKit?.title || ""}
                             placeholder="title"
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
@@ -120,7 +120,7 @@ export const KitForm = ({ currentUser }) => {
                         <textarea
                             type="text"
                             className="form-control-larger"
-                            value= {currentKit.description || ""}
+                            value= {currentKit?.description || ""}
                             placeholder="brief description"
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
@@ -137,7 +137,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value= {currentKit.color1 || ""}
+                                value= {currentKit?.color1 || ""}
                                 placeholder="color"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -148,7 +148,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit.color2 || ""}
+                                value={currentKit?.color2 || ""}
                                 placeholder="color"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -158,7 +158,7 @@ export const KitForm = ({ currentUser }) => {
                             />  <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit.color3 || ""}
+                                value={currentKit?.color3 || ""}
                                 placeholder="color"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -195,7 +195,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit.strandDominant || ""}
+                                value={currentKit?.strandDominant || ""}
                                 placeholder="dominant"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -206,7 +206,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit.strandSecondary || ""}
+                                value={currentKit?.strandSecondary || ""}
                                 placeholder="secondary"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -216,7 +216,7 @@ export const KitForm = ({ currentUser }) => {
                             />  <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit.strandTertiary || ""}
+                                value={currentKit?.strandTertiary || ""}
                                 placeholder="tertiary"
                                 onChange={(event) => {
                                     const kitCopy = { ...kit }
@@ -235,10 +235,10 @@ export const KitForm = ({ currentUser }) => {
                                 kitCopy.skillLevelId = event.target.value
                                 setKit(kitCopy)
                             }}  >
-                            <option value={0} disabled >{currentKit.skillLevel?.level || "Skill Level" }</option> 
-                            <option value={currentKit.skillLevelId || 1}>Beginner</option>
-                            <option value={currentKit.skillLevelId || 2}>Intermediate</option>
-                            <option value={currentKit.skillLevelId || 3}>Advanced</option>
+                            <option value={0} disabled >{currentKit?.skillLevel?.level || "Skill Level" }</option> 
+                            <option value={currentKit?.skillLevelId || 1}>Beginner</option>
+                            <option value={currentKit?.skillLevelId || 2}>Intermediate</option>
+                            <option value={currentKit?.skillLevelId || 3}>Advanced</option>
                         </select>
                     </div>
                 </fieldset>
@@ -247,7 +247,7 @@ export const KitForm = ({ currentUser }) => {
                         <textarea
                             type="text"
                             className="form-control-larger"
-                            value={currentKit.notes || ""}
+                            value={currentKit?.notes || ""}
                             placeholder={"notes"}
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
@@ -262,7 +262,7 @@ export const KitForm = ({ currentUser }) => {
                         <textarea
                             type="text"
                             className="photoInput"
-                            value={currentKit.pattern || "image URL"}
+                            value={currentKit?.pattern || "image URL"}
                             placeholder=""
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
