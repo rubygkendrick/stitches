@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createNewKitFavorite, getAllStitches, getKitByKitId } from "../../services/kitService";
+import { createNewKitFavorite, deleteFavorite, getAllStitches, getKitByKitId } from "../../services/kitService";
 import "./KitDetails.css"
 
 export const KitDetails = ({ currentUser }) => {
     const { kitId } = useParams()
     const [kit, setKit] = useState({})
     const [allStitches, setAllStitches] = useState([])
+    const [favorite, setFavorite] = useState({})
     const navigate = useNavigate()
 
+
+    useEffect(() => {
+        const isAFavorite = kit.kitFavorite?.find(fave => fave.userId === currentUser.id)
+        setFavorite(isAFavorite)
+    }, [currentUser.id, kit.kitFavorite])
 
     useEffect(() => {
         getAllStitches().then(stitchArray => {
@@ -22,19 +28,28 @@ export const KitDetails = ({ currentUser }) => {
 
         )
     }, [kitId])
-   
+
     const handleEditClick = () => {
         navigate(`/editKit/${kit.id}`)
     }
 
     const handleFavoritesClick = () => {
-        const newFavorite = {
-            userId: currentUser.id,
-            kitId: kit.id
+
+        if (favorite) {
+            deleteFavorite(favorite.id).then(() => {
+                getKitByKitId(parseInt(kitId)).then(kitArray =>
+                    setKit(kitArray[0]))
+            })
+        } else {
+            const newFavorite = {
+                userId: currentUser.id,
+                kitId: kit.id
+            }
+            createNewKitFavorite(newFavorite).then(() => {
+                navigate("/favorites")
+            })
         }
-        createNewKitFavorite(newFavorite).then(() => {
-            navigate("/favorites")
-        })
+
 
     }
 
@@ -78,9 +93,14 @@ export const KitDetails = ({ currentUser }) => {
                 <button className="btn-primary detail-btn"
                     onClick={handleEditClick}
                 >Edit</button>
-            ) : <button className="btn-primary detail-btn"
-                onClick={handleFavoritesClick}
-            >Add to Favorites</button>}
+            ) : ""}
+
+            {currentUser.id !== kit.userId ? (
+                <button className="btn-primary detail-btn"
+                    onClick={handleFavoritesClick}
+                >
+                    {favorite ? "Remove from Favorites" : "Add to Favorites"}
+                </button>) : ""}
         </>
     )
 

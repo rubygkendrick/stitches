@@ -7,7 +7,7 @@ export const getAllStitches = () => {
 }
 
 export const getKitByKitId = (kitId) => {
-    return fetch(`http://localhost:8088/kits?id=${kitId}&_expand=skillLevel&_embed=kitStitches`).then(res => res.json())
+    return fetch(`http://localhost:8088/kits?id=${kitId}&_expand=skillLevel&_embed=kitStitches&_embed=kitFavorite`).then(res => res.json())
 }
 
 export const getAllKitStitches = () => {
@@ -67,7 +67,12 @@ export const createNewKitFavorite = (favoriteObject) => {
 
 
 
+export const deleteFavorite = (favoriteId) => {
+    return fetch(`http://localhost:8088/kitFavorite/${favoriteId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
 
-
-
-
+        },
+    })
+}

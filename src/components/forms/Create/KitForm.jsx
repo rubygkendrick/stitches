@@ -32,14 +32,14 @@ export const KitForm = ({ currentUser }) => {
     })
 
 
+
     useEffect(() => {
         
             getKitByKitId(parseInt(kitId)).then(kitArray =>
                 setCurrentKit(kitArray[0])
             ) 
-     
+         
     }, [kitId])
-
 
 
     useEffect(() => {
@@ -59,7 +59,7 @@ export const KitForm = ({ currentUser }) => {
             const updatedKitStitchIds = currentKit?.kitStitches?.map(kitStitch => kitStitch.stitchId)
             setCurrentKitStitchIds(updatedKitStitchIds)
             setPreviousStitches(updatedKitStitchIds)
-        }
+        } 
     }, [currentKit])
 
 
@@ -173,6 +173,7 @@ export const KitForm = ({ currentUser }) => {
                             required
                             defaultValue={currentKit?.title ? currentKit.title : undefined}
                             placeholder={currentKit?.title ? currentKit.title : "title"}
+                            
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -195,6 +196,7 @@ export const KitForm = ({ currentUser }) => {
                             required
                             defaultValue={currentKit?.description ? currentKit.description : undefined}
                             placeholder={currentKit?.description ? currentKit.description : "brief description"}
+    
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -278,7 +280,7 @@ export const KitForm = ({ currentUser }) => {
                                         type="checkbox"
                                         value={stitchObject.id}
                                         defaultChecked={
-                                            currentKitStitchIds ? currentKitStitchIds.includes(stitchObject.id) : null
+                                          currentKitStitchIds ? currentKitStitchIds.includes(stitchObject.id) : null
                                         }
 
                                         onChange={handleCheckBoxChange}
