@@ -3,9 +3,9 @@ import "./Kits.css"
 import { getAllKits } from "../../services/kitService"
 import { Link } from "react-router-dom"
 
-export const KitFavorites = ({ currentUser }) => {
+export const MyKits = ({ currentUser }) => {
 
-    const [favorites, setFavorites] = useState([])
+    const [myKits, setMyKits] = useState([])
     const [allKits, setAllKits] = useState([])
 
     const getAndResetAllKits = () => {
@@ -19,15 +19,13 @@ export const KitFavorites = ({ currentUser }) => {
     }, [])
 
     useEffect(() => {
-        const userFavorites = allKits.filter(kit => {
-            return kit.kitFavorite.find(favorite => favorite.userId === currentUser.id);
-        });
-        setFavorites(userFavorites);
-    }, [allKits, currentUser]);
+        const userKits = allKits.filter(kit => kit.userId === currentUser.id)
+        setMyKits(userKits)
+    }, [allKits, currentUser])
 
     return (
         <div className="kitsMain-container">
-            {favorites.map((kit) => (
+            {myKits.map((kit) => (
                 <div key={kit.id} className="kit-container">
                     <Link to={`/kitDetails/${kit.id}`} ><h2>{kit.title}</h2></Link>
 

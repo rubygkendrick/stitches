@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import "../forms.css"
 import { createNewKit, createNewKitStitch, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../../services/kitService"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 export const KitForm = ({ currentUser }) => {
     const navigate = useNavigate()
+  
     const { kitId } = useParams()
     const [allStitches, setAllStitches] = useState([])
     const [newKitStitchIds, setNewKitStitchIds] = useState([])
@@ -14,7 +15,7 @@ export const KitForm = ({ currentUser }) => {
     const [previousKitStitches, setPreviousStitches] = useState([])
 
     const [kit, setKit] = useState({
-        id: 1,
+        id: 0,
         title: "",
         description: "",
         pattern: "",
@@ -26,16 +27,20 @@ export const KitForm = ({ currentUser }) => {
         strandTertiary: 0,
         userId: 0,
         notes: "",
-        skillLevelId: 0,
+        skillLevelId: "",
         completedPhoto: ""
     })
 
+
     useEffect(() => {
-       
-        getKitByKitId(parseInt(kitId)).then(kitArray =>
-            setCurrentKit(kitArray[0])
-        )
+        
+            getKitByKitId(parseInt(kitId)).then(kitArray =>
+                setCurrentKit(kitArray[0])
+            ) 
+     
     }, [kitId])
+
+
 
     useEffect(() => {
         getAllKitStitches().then(kitStitchesArray => {
@@ -61,8 +66,6 @@ export const KitForm = ({ currentUser }) => {
 
     const handleSave = (event) => {
         event.preventDefault()
-
-
 
         if (currentKit) {
             const existingKit = {
@@ -168,8 +171,8 @@ export const KitForm = ({ currentUser }) => {
                             type="text"
                             className="form-control"
                             required
-                            value={currentKit ? currentKit.title : undefined}
-                            placeholder={currentKit ? currentKit.title : "title"}
+                            defaultValue={currentKit?.title ? currentKit.title : undefined}
+                            placeholder={currentKit?.title ? currentKit.title : "title"}
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -190,8 +193,8 @@ export const KitForm = ({ currentUser }) => {
                             type="text"
                             className="form-control-larger"
                             required
-                            value={currentKit ? currentKit.description : undefined}
-                            placeholder={currentKit ? currentKit.description : "brief description"}
+                            defaultValue={currentKit?.description ? currentKit.description : undefined}
+                            placeholder={currentKit?.description ? currentKit.description : "brief description"}
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -214,8 +217,8 @@ export const KitForm = ({ currentUser }) => {
                                 type="text"
                                 className="form-color"
                                 required
-                                value={currentKit ? currentKit.color1 : undefined}
-                                placeholder={currentKit ? currentKit.color1 : "color"}
+                                defaultValue={currentKit?.color1 ? currentKit.color1 : undefined}
+                                placeholder={currentKit?.color1 ? currentKit.color1 : "color"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }
@@ -231,8 +234,8 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit ? currentKit.color2 : undefined}
-                                placeholder={currentKit ? currentKit.color2 : "color"}
+                                defaultValue={currentKit?.color2 ? currentKit.color2 : undefined}
+                                placeholder={currentKit?.color2 ? currentKit.color2 : "color"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }
@@ -248,8 +251,8 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit ? currentKit.color3 : undefined}
-                                placeholder={currentKit ? currentKit.color3 : "color"}
+                                defaultValue={currentKit?.color3 ? currentKit.color3 : undefined}
+                                placeholder={currentKit?.color3 ? currentKit.color3 : "color"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }
@@ -274,7 +277,7 @@ export const KitForm = ({ currentUser }) => {
                                     <input className="radio"
                                         type="checkbox"
                                         value={stitchObject.id}
-                                        checked={
+                                        defaultChecked={
                                             currentKitStitchIds ? currentKitStitchIds.includes(stitchObject.id) : null
                                         }
 
@@ -295,8 +298,8 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit && currentKit.strandDominant ? currentKit.strandDominant : undefined}
-                                placeholder={currentKit ? currentKit.strandDominant : "dominant"}
+                                defaultValue={currentKit?.strandDominant ? currentKit.strandDominant : undefined}
+                                placeholder={currentKit?.strandDominant ? currentKit.strandDominant : "dominant"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }
@@ -312,8 +315,8 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit && currentKit.strandSecondary ? currentKit.strandSecondary : undefined}
-                                placeholder={currentKit ? currentKit.strandSecondary : "secondary"}
+                                defaultValue={currentKit?.strandSecondary ? currentKit.strandSecondary : undefined}
+                                placeholder={currentKit?.strandSecondary ? currentKit.strandSecondary : "secondary"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }
@@ -329,8 +332,8 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                value={currentKit && currentKit.strandTertiary ? currentKit.strandTertiary : undefined}
-                                placeholder={currentKit ? currentKit.strandTertiary : "tertiary"}
+                                defaultValue={currentKit?.strandTertiary ? currentKit.strandTertiary : undefined}
+                                placeholder={currentKit?.strandTertiary ? currentKit.strandTertiary : "tertiary"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }
@@ -349,7 +352,7 @@ export const KitForm = ({ currentUser }) => {
                 <fieldset>
                     <div className="form-group">
                         <select className="form-control dropdown"
-                            defaultValue={currentKit ? currentKit.skillLevelId : ""}
+                            defaultValue={currentKit?.skillLevelId ? currentKit.skillLevelId : undefined}
                             onChange={(event) => {
                                 const kitCopy = { ...kit }
                                 kitCopy.skillLevelId = event.target.value
@@ -372,8 +375,8 @@ export const KitForm = ({ currentUser }) => {
                         <textarea
                             type="text"
                             className="form-control-larger"
-                            value={currentKit ? currentKit.notes : undefined}
-                            placeholder={currentKit ? currentKit.notes : "notes"}
+                            defaultValue={currentKit?.notes ? currentKit.notes : undefined}
+                            placeholder={currentKit?.notes ? currentKit.notes : "notes"}
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -393,8 +396,8 @@ export const KitForm = ({ currentUser }) => {
                         <textarea
                             type="text"
                             className="photoInput"
-                            value={currentKit?.pattern || undefined}
-                            placeholder={currentKit?.pattern || "image URL"}
+                            defaultValue={currentKit?.pattern ? currentKit.pattern : undefined}
+                            placeholder={currentKit?.pattern ? currentKit.pattern : "image URL"}
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -413,8 +416,8 @@ export const KitForm = ({ currentUser }) => {
                             <textarea
                                 type="text"
                                 className="photoInput"
-                                value={currentKit ? currentKit.completedPhoto : undefined}
-                                placeholder={currentKit ? currentKit.completedPhoto : "image URL"}
+                                defaultValue={currentKit?.completedPhoto ? currentKit.completedPhoto : undefined}
+                                placeholder={currentKit?.completedPhoto ? currentKit.completedPhoto : "image URL"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }

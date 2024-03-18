@@ -1,12 +1,14 @@
-.favorites-container{
+.kitsMain-container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    
 }
 
 .kit-container {
-    margin: 4rem auto;
-    height: 50%;
-    width: 33%;
+    margin-top: 4rem;
+    height: 40%;
+    width: 25%;
     text-align: center;
     padding: 3rem 1rem;
     border: 1px solid var(--outline);
@@ -17,7 +19,7 @@
 
 .kit-image{
     margin-top: 1rem;
-    width: 11rem;
+    width: 10rem;
     height: 9rem;
     align-self: center;
     border: 1px solid var(--outline);

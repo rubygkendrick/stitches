@@ -6,6 +6,8 @@ import { Nav } from "../components/nav/Nav"
 import { KitForm } from "../components/forms/Create/KitForm"
 import { KitDetails } from "../components/Kits/KitDetails"
 import { KitFavorites } from "../components/Kits/KitFavorites"
+import { MyKits } from "../components/Kits/MyKits"
+import { AllKits } from "../components/Kits/AllKits"
 
 
 export const ApplicationViews = () => {
@@ -25,10 +27,10 @@ export const ApplicationViews = () => {
             </>
         }>
             <Route index element={<Welcome />} />
-            <Route path="kits" element={<>Kits</>}></Route>
-            <Route path="myKits" element={<>My Kits</>}></Route>
+            <Route path="kits" element={<AllKits />}></Route>
+            <Route path="myKits" element={<MyKits currentUser={currentUser}/>}></Route>
             <Route path="createKit" element={<KitForm currentUser={currentUser} />}></Route>
-            <Route path="editKit/:kitId" element={<KitForm/>}></Route>
+            <Route path="editKit/:kitId" element={<KitForm currentUser={currentUser}/>}></Route>
             <Route path="favorites" element={<KitFavorites currentUser={currentUser}/>}></Route>
             <Route path="profile" element={<>Profile</>}></Route>
             <Route path="kitDetails/:kitId" element={<KitDetails currentUser={currentUser}/>}></Route>
