@@ -303,8 +303,8 @@ export const KitForm = ({ currentUser }) => {
                                     <input className="radio"
                                         type="checkbox"
                                         value={stitchObject.id}
-                                        defaultChecked={
-                                            currentKit ? currentKitStitchIds?.includes(stitchObject.id) : false
+                                        checked={
+                                            currentKit ? currentKitStitchIds?.includes(stitchObject.id) : newKitStitchIds.includes(stitchObject.id)
                                         }
 
                                         onChange={handleCheckBoxChange}
@@ -324,7 +324,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                defaultValue={currentKit?.strandDominant ? currentKit.strandDominant : undefined}
+                                defaultValue={currentKit?.strandDominant ? currentKit.strandDominant : ""}
                                 placeholder={currentKit?.strandDominant ? currentKit.strandDominant : "dominant"}
                                 onChange={(event) => {
                                     if (currentKit) {
@@ -341,7 +341,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                defaultValue={currentKit?.strandSecondary ? currentKit.strandSecondary : undefined}
+                                defaultValue={currentKit?.strandSecondary ? currentKit.strandSecondary : ""}
                                 placeholder={currentKit?.strandSecondary ? currentKit.strandSecondary : "secondary"}
                                 onChange={(event) => {
                                     if (currentKit) {
@@ -358,7 +358,7 @@ export const KitForm = ({ currentUser }) => {
                             <input
                                 type="text"
                                 className="form-color"
-                                defaultValue={currentKit?.strandTertiary ? currentKit.strandTertiary : undefined}
+                                defaultValue={currentKit?.strandTertiary ? currentKit.strandTertiary : ""}
                                 placeholder={currentKit?.strandTertiary ? currentKit.strandTertiary : "tertiary"}
                                 onChange={(event) => {
                                     if (currentKit) {
