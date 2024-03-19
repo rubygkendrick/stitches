@@ -85,7 +85,7 @@ export const KitDetails = ({ currentUser }) => {
                     })}
                 </div>
                 <h3>Strand Counts:</h3>
-                <p>{kit.strandDominant}, {kit.strandSecondary} , {kit.strandTertiary}</p>
+                <p>{kit.strandDominant} / {kit.strandSecondary} / {kit.strandTertiary}</p>
                 <h3>Notes:</h3>
                 <p>{kit.notes}</p>
             </div>

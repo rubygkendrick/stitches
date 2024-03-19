@@ -76,3 +76,13 @@ export const deleteFavorite = (favoriteId) => {
         },
     })
 }
+
+export const deleteKit = (kitId) => {
+    return fetch(`http://localhost:8088/kits/${kitId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+
+        },
+    })
+}

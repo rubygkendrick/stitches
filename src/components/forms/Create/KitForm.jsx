@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import "../forms.css"
-import { createNewKit, createNewKitStitch, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../../services/kitService"
+import { createNewKit, createNewKitStitch, deleteKit, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../../services/kitService"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 export const KitForm = ({ currentUser }) => {
     const navigate = useNavigate()
-  
+    const location = useLocation()
+
     const { kitId } = useParams()
     const [allStitches, setAllStitches] = useState([])
     const [newKitStitchIds, setNewKitStitchIds] = useState([])
@@ -13,6 +14,7 @@ export const KitForm = ({ currentUser }) => {
     const [currentKit, setCurrentKit] = useState({})
     const [allKitStitches, setAllKitStitches] = useState([])
     const [previousKitStitches, setPreviousStitches] = useState([])
+
 
     const [kit, setKit] = useState({
         id: 0,
@@ -22,9 +24,9 @@ export const KitForm = ({ currentUser }) => {
         color1: "",
         color2: "",
         color3: "",
-        strandDominant: 0,
-        strandSecondary: 0,
-        strandTertiary: 0,
+        strandDominant: "",
+        strandSecondary: "",
+        strandTertiary: "",
         userId: 0,
         notes: "",
         skillLevelId: "",
@@ -34,11 +36,11 @@ export const KitForm = ({ currentUser }) => {
 
 
     useEffect(() => {
-        
-            getKitByKitId(parseInt(kitId)).then(kitArray =>
-                setCurrentKit(kitArray[0])
-            ) 
-         
+
+        getKitByKitId(parseInt(kitId)).then(kitArray =>
+            setCurrentKit(kitArray[0])
+        )
+
     }, [kitId])
 
 
@@ -59,7 +61,10 @@ export const KitForm = ({ currentUser }) => {
             const updatedKitStitchIds = currentKit?.kitStitches?.map(kitStitch => kitStitch.stitchId)
             setCurrentKitStitchIds(updatedKitStitchIds)
             setPreviousStitches(updatedKitStitchIds)
-        } 
+        } else {
+            setCurrentKitStitchIds([])
+            setPreviousStitches([])
+        }
     }, [currentKit])
 
 
@@ -129,10 +134,12 @@ export const KitForm = ({ currentUser }) => {
                     const newKitStitch = {
                         stitchId: parseInt(stitchId),
                         kitId: newKitId
-                    };
-                    createNewKitStitch(newKitStitch);
+                    }
+                    createNewKitStitch(newKitStitch).then(
+                        navigate("/myKits")
+                    )
                 })
-                navigate("/myKits")
+                
             })
         } else {
             window.alert(
@@ -141,10 +148,11 @@ export const KitForm = ({ currentUser }) => {
         }
     }
 
+
     const handleCheckBoxChange = (event) => {
         const value = parseInt(event.target.value)
-        const isChecked = event.target.checked;
-        if (!currentKitStitchIds) {
+        const isChecked = event.target.checked
+        if (!currentKit) {
             // If there is no currentKitStitch, handle the checkbox change as usual
             if (isChecked) {
                 setNewKitStitchIds([...newKitStitchIds, value])
@@ -160,11 +168,27 @@ export const KitForm = ({ currentUser }) => {
         }
     }
 
+
+    const handleKitDelete = () => {
+
+        const kitStitchesToDelete = allKitStitches.filter(kitStitch =>
+            kitStitch.kitId == currentKit.id)
+        kitStitchesToDelete.forEach(stitch => {
+
+            deleteKitStitch(stitch.id)
+        })
+
+        deleteKit(currentKit.id)
+        navigate("/myKits")
+    }
+
+
+
     return (
         <div>
             {currentKit ? "" : <h1 className="logo">Create a Kit</h1>}
 
-            <form>
+            <form >
                 <fieldset>
                     <div className="form-group">
                         <input
@@ -173,7 +197,7 @@ export const KitForm = ({ currentUser }) => {
                             required
                             defaultValue={currentKit?.title ? currentKit.title : undefined}
                             placeholder={currentKit?.title ? currentKit.title : "title"}
-                            
+
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -194,9 +218,9 @@ export const KitForm = ({ currentUser }) => {
                             type="text"
                             className="form-control-larger"
                             required
-                            defaultValue={currentKit?.description ? currentKit.description : undefined}
+                            defaultValue={currentKit?.description ? currentKit.description : ""}
                             placeholder={currentKit?.description ? currentKit.description : "brief description"}
-    
+
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -275,12 +299,12 @@ export const KitForm = ({ currentUser }) => {
                         <legend>Stitches:</legend>
                         <div className="form-radio">
                             {allStitches.map(stitchObject => (
-                                <label key={stitchObject.id}>
+                                <label key={stitchObject.id} >
                                     <input className="radio"
                                         type="checkbox"
                                         value={stitchObject.id}
                                         defaultChecked={
-                                          currentKitStitchIds ? currentKitStitchIds.includes(stitchObject.id) : null
+                                            currentKit ? currentKitStitchIds?.includes(stitchObject.id) : false
                                         }
 
                                         onChange={handleCheckBoxChange}
@@ -377,7 +401,7 @@ export const KitForm = ({ currentUser }) => {
                         <textarea
                             type="text"
                             className="form-control-larger"
-                            defaultValue={currentKit?.notes ? currentKit.notes : undefined}
+                            defaultValue={currentKit?.notes ? currentKit.notes : ""}
                             placeholder={currentKit?.notes ? currentKit.notes : "notes"}
                             onChange={(event) => {
                                 if (currentKit) {
@@ -398,8 +422,8 @@ export const KitForm = ({ currentUser }) => {
                         <textarea
                             type="text"
                             className="photoInput"
-                            defaultValue={currentKit?.pattern ? currentKit.pattern : undefined}
-                            placeholder={currentKit?.pattern ? currentKit.pattern : "image URL"}
+                            defaultValue={currentKit?.pattern ? currentKit.pattern : ""}
+                            placeholder={currentKit?.pattern ? currentKit.pattern : "pattern image URL"}
                             onChange={(event) => {
                                 if (currentKit) {
                                     const currentKitCopy = { ...currentKit }
@@ -418,8 +442,8 @@ export const KitForm = ({ currentUser }) => {
                             <textarea
                                 type="text"
                                 className="photoInput"
-                                defaultValue={currentKit?.completedPhoto ? currentKit.completedPhoto : undefined}
-                                placeholder={currentKit?.completedPhoto ? currentKit.completedPhoto : "image URL"}
+                                defaultValue={currentKit?.completedPhoto ? currentKit.completedPhoto : ""}
+                                placeholder={currentKit?.completedPhoto ? currentKit.completedPhoto : "completed image URL"}
                                 onChange={(event) => {
                                     if (currentKit) {
                                         const currentKitCopy = { ...currentKit }
@@ -444,6 +468,7 @@ export const KitForm = ({ currentUser }) => {
             {currentKit ? (
                 <div className="form-group">
                     <button className="form-btn-main btn-primary"
+                        onClick={handleKitDelete}
                     >Delete Kit</button>
                 </div>
             ) : (
