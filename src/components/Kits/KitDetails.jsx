@@ -25,7 +25,6 @@ export const KitDetails = ({ currentUser }) => {
     useEffect(() => {
         getKitByKitId(parseInt(kitId)).then(kitArray =>
             setKit(kitArray[0])
-
         )
     }, [kitId])
 

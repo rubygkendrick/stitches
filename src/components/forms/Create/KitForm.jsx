@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
 import "../forms.css"
 import { createNewKit, createNewKitStitch, deleteKit, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../../services/kitService"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 export const KitForm = ({ currentUser }) => {
     const navigate = useNavigate()
-    const location = useLocation()
 
     const { kitId } = useParams()
     const [allStitches, setAllStitches] = useState([])
@@ -14,8 +13,6 @@ export const KitForm = ({ currentUser }) => {
     const [currentKit, setCurrentKit] = useState({})
     const [allKitStitches, setAllKitStitches] = useState([])
     const [previousKitStitches, setPreviousStitches] = useState([])
-
-
     const [kit, setKit] = useState({
         id: 0,
         title: "",
@@ -32,7 +29,6 @@ export const KitForm = ({ currentUser }) => {
         skillLevelId: "",
         completedPhoto: ""
     })
-
 
 
     useEffect(() => {
@@ -139,7 +135,7 @@ export const KitForm = ({ currentUser }) => {
                         navigate("/myKits")
                     )
                 })
-                
+
             })
         } else {
             window.alert(
@@ -153,7 +149,7 @@ export const KitForm = ({ currentUser }) => {
         const value = parseInt(event.target.value)
         const isChecked = event.target.checked
         if (!currentKit) {
-            // If there is no currentKitStitch, handle the checkbox change as usual
+
             if (isChecked) {
                 setNewKitStitchIds([...newKitStitchIds, value])
             } else {
@@ -304,9 +300,9 @@ export const KitForm = ({ currentUser }) => {
                                         type="checkbox"
                                         value={stitchObject.id}
                                         checked={
-                                            currentKit ? currentKitStitchIds?.includes(stitchObject.id) : newKitStitchIds.includes(stitchObject.id)
+                                            currentKit ? currentKitStitchIds?.includes(stitchObject.id) :
+                                                newKitStitchIds.includes(stitchObject.id)
                                         }
-
                                         onChange={handleCheckBoxChange}
                                     >
                                     </input>

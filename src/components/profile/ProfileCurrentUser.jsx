@@ -10,7 +10,6 @@ export const ProfileCurrentUser = ({ currentUser }) => {
     const [userProfileInfo, setUserProfileInfo] = useState({})
     const [usersKits, serUsersKits] = useState([])
 
-
     useEffect(() => {
         getAllUsers().then(userArray => {
             const user = userArray.find(user => user.id == currentUser.id)
@@ -36,7 +35,9 @@ export const ProfileCurrentUser = ({ currentUser }) => {
                     <h4>Skill Level: Advanced</h4>)}
             <h4>Number of Kits: {usersKits.length}</h4>
         </div>
-        <Link to={`/editProfile/${currentUser.id}`}><button className="btn-primary">Edit Profile</button></Link>
+        <Link to={`/editProfile/${currentUser.id}`}>
+            <button className="btn-primary">Edit Profile</button>
+        </Link>
     </>
 
 }

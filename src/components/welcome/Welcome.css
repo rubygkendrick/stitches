@@ -8,8 +8,7 @@
     border-radius: 20px;
     box-shadow: 1px 2px 5px #999999;
   }
-  
-  /* This targets any h1 that is a child of an element with the .welcome-container class */
+
   .welcome-container > h1 {
     display: flex;
     flex-direction: column;

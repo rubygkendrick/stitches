@@ -16,7 +16,6 @@ export const EditProfile = ({ currentUser }) => {
     }, [currentUser.id, userId])
 
     const handleProfileSave = () => {
-
         const updatedUser = {
             fullName: userProfileInfo.fullName,
             email: userProfileInfo.email,

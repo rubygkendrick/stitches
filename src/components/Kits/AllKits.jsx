@@ -7,6 +7,7 @@ export const AllKits = ({ currentUser }) => {
 
     const [allKits, setAllKits] = useState([])
 
+
     const getAndResetAllKits = () => {
         getAllKits().then(kitsArray => {
             setAllKits(kitsArray)
@@ -16,7 +17,6 @@ export const AllKits = ({ currentUser }) => {
     useEffect(() => {
         getAndResetAllKits()
     }, [])
-
 
 
     return (
