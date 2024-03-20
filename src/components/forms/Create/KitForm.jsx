@@ -12,6 +12,7 @@ export const KitForm = ({ currentUser }) => {
     const [currentKitStitchIds, setCurrentKitStitchIds] = useState([])
     const [currentKit, setCurrentKit] = useState({})
     const [allKitStitches, setAllKitStitches] = useState([])
+    const [hasImportedKitStitches, setHasImportedKitStitches] = useState(false)
     const [previousKitStitches, setPreviousStitches] = useState([])
     const [kit, setKit] = useState({
         id: 0,
@@ -53,13 +54,18 @@ export const KitForm = ({ currentUser }) => {
     }, [])
 
     useEffect(() => {
-        if (currentKit) {
-            const updatedKitStitchIds = currentKit?.kitStitches?.map(kitStitch => kitStitch.stitchId)
-            setCurrentKitStitchIds(updatedKitStitchIds)
-            setPreviousStitches(updatedKitStitchIds)
-        } else {
-            setCurrentKitStitchIds([])
-            setPreviousStitches([])
+
+        if (!hasImportedKitStitches) {
+            if (currentKit.kitStitches) {
+                const updatedKitStitchIds = currentKit?.kitStitches?.map(kitStitch => kitStitch.stitchId)
+                setCurrentKitStitchIds(updatedKitStitchIds)
+                setPreviousStitches(updatedKitStitchIds)
+                setHasImportedKitStitches(true)
+
+            } else {
+                setCurrentKitStitchIds([])
+                setPreviousStitches([])
+            }
         }
     }, [currentKit])
 
@@ -300,7 +306,7 @@ export const KitForm = ({ currentUser }) => {
                                         type="checkbox"
                                         value={stitchObject.id}
                                         checked={
-                                            currentKit ? currentKitStitchIds?.includes(stitchObject.id) :
+                                            currentKitStitchIds ? currentKitStitchIds?.includes(stitchObject.id) :
                                                 newKitStitchIds.includes(stitchObject.id)
                                         }
                                         onChange={handleCheckBoxChange}
@@ -374,16 +380,23 @@ export const KitForm = ({ currentUser }) => {
                 <fieldset>
                     <div className="form-group">
                         <select className="form-control dropdown"
-                            defaultValue={currentKit?.skillLevelId ? currentKit.skillLevelId : undefined}
+                            value={currentKit?.skillLevelId ? currentKit.skillLevelId : kit.skillLevelId} selected
                             onChange={(event) => {
-                                const kitCopy = { ...kit }
-                                kitCopy.skillLevelId = event.target.value
-                                setKit(kitCopy)
+                                if (currentKit) {
+                                    const currentKitCopy = { ...currentKit }
+                                    currentKitCopy.skillLevelId = event.target.value
+                                    setCurrentKit(currentKitCopy)
+                                } else {
+                                    const kitCopy = { ...kit }
+                                    kitCopy.skillLevelId = event.target.value
+                                    setKit(kitCopy)
+                                }
+
                             }}  >
                             {currentKit ? (
-                                <option value="" disabled>Skill Level</option>
+                                <option value={0} disabled>Skill Level</option>
                             ) : (
-                                <option value="" selected>Skill Level</option>
+                                <option value="" disabled >Skill Level</option>
                             )}
 
                             <option value={1}>Beginner</option>
