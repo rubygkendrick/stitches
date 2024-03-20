@@ -35,7 +35,7 @@ textarea {
 body {
 
   background-color: var(--appBackground);
-  background-image: url("images/background.jpg");
+  background-image: url("images/backgroundTransformed.jpeg");
   background-size: auto;
 
 }

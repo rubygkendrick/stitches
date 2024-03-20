@@ -6,6 +6,7 @@ import { getAllKits } from "../../services/kitService"
 
 
 export const ProfileCurrentUser = ({ currentUser }) => {
+
     const [userProfileInfo, setUserProfileInfo] = useState({})
     const [usersKits, serUsersKits] = useState([])
 
@@ -26,7 +27,7 @@ export const ProfileCurrentUser = ({ currentUser }) => {
 
     return <>
         <h1 className="logo">Stitches</h1>
-        <div className="welcome-container">
+        <div className="profile-container">
             <h1>{userProfileInfo?.fullName}</h1>
             {userProfileInfo?.skillLevelId === 1 ?
                 <h3>Skill Level: Beginner</h3> :
@@ -35,6 +36,7 @@ export const ProfileCurrentUser = ({ currentUser }) => {
                     <h4>Skill Level: Advanced</h4>)}
             <h4>Number of Kits: {usersKits.length}</h4>
         </div>
+        <Link to={`/editProfile/${currentUser.id}`}><button className="btn-primary">Edit Profile</button></Link>
     </>
 
 }

@@ -9,6 +9,7 @@ import { KitFavorites } from "../components/Kits/KitFavorites"
 import { MyKits } from "../components/Kits/MyKits"
 import { AllKits } from "../components/Kits/AllKits"
 import { ProfileCurrentUser } from "../components/profile/ProfileCurrentUser"
+import { EditProfile } from "../components/profile/EditProfile"
 
 
 export const ApplicationViews = () => {
@@ -34,7 +35,7 @@ export const ApplicationViews = () => {
             <Route path="editKit/:kitId" element={<KitForm currentUser={currentUser}/>}></Route>
             <Route path="favorites" element={<KitFavorites currentUser={currentUser}/>}></Route>
             <Route path="profile" element={<ProfileCurrentUser currentUser={currentUser}/>}></Route>
-            <Route path="editProfile" element={<>Edit Profile</>}></Route>
+            <Route path="editProfile/:userId" element={<EditProfile currentUser={currentUser}/>}></Route>
             <Route path="kitDetails/:kitId" element={<KitDetails currentUser={currentUser}/>}></Route>
         </Route>
         
