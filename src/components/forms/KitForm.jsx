@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react"
-import "./forms.css"
-import { createNewKit, createNewKitStitch, deleteKit, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../services/kitService"
+import "../forms.css"
+import { createNewKit, createNewKitStitch, deleteKit, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../../services/kitService"
 import { useNavigate, useParams } from "react-router-dom"
-import ImageInputsForForm from "./ImageInputsForForm"
-import { NotesInputForForm } from "./NotesInputForForm"
-import { SkillLevelInputForForm } from "./SkillLevelInputForForm"
-
 
 export const KitForm = ({ currentUser }) => {
     const navigate = useNavigate()
@@ -375,29 +371,91 @@ export const KitForm = ({ currentUser }) => {
                         </div>
                     </div>
                 </fieldset>
-                <SkillLevelInputForForm
-                    currentKit={currentKit}
-                    setKit={setKit}
-                    kit={kit}
-                />
-       
+                <fieldset>
+                    <div className="form-group">
+                        <select className="form-control dropdown"
+                            defaultValue={currentKit?.skillLevelId ? currentKit.skillLevelId : undefined}
+                            onChange={(event) => {
+                                const kitCopy = { ...kit }
+                                kitCopy.skillLevelId = event.target.value
+                                setKit(kitCopy)
+                            }}  >
+                            {currentKit ? (
+                                <option value="" disabled>Skill Level</option>
+                            ) : (
+                                <option value="" selected>Skill Level</option>
+                            )}
 
-                <NotesInputForForm
-                    currentKit={currentKit}
-                    setKit={setKit}
-                    setCurrentKit={setCurrentKit}
-                    kit={kit}
-                />
-
-                <ImageInputsForForm
-                    currentKit={currentKit}
-                    setKit={setKit}
-                    setCurrentKit={setCurrentKit}
-                    kit={kit}
-                />
-
+                            <option value={1}>Beginner</option>
+                            <option value={2}>Intermediate</option>
+                            <option value={3}>Advanced</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <textarea
+                            type="text"
+                            className="form-control-larger"
+                            defaultValue={currentKit?.notes ? currentKit.notes : ""}
+                            placeholder={currentKit?.notes ? currentKit.notes : "notes"}
+                            onChange={(event) => {
+                                if (currentKit) {
+                                    const currentKitCopy = { ...currentKit }
+                                    currentKitCopy.notes = event.target.value
+                                    setCurrentKit(currentKitCopy)
+                                } else {
+                                    const kitCopy = { ...kit }
+                                    kitCopy.notes = event.target.value
+                                    setKit(kitCopy)
+                                }
+                            }}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <textarea
+                            type="text"
+                            className="photoInput"
+                            defaultValue={currentKit?.pattern ? currentKit.pattern : ""}
+                            placeholder={currentKit?.pattern ? currentKit.pattern : "pattern image URL"}
+                            onChange={(event) => {
+                                if (currentKit) {
+                                    const currentKitCopy = { ...currentKit }
+                                    currentKitCopy.pattern = event.target.value
+                                    setCurrentKit(currentKitCopy)
+                                } else {
+                                    const kitCopy = { ...kit }
+                                    kitCopy.pattern = event.target.value
+                                    setKit(kitCopy)
+                                }
+                            }}
+                        />
+                    </div>
+                    <fieldset>
+                        <div className="form-group">
+                            <textarea
+                                type="text"
+                                className="photoInput"
+                                defaultValue={currentKit?.completedPhoto ? currentKit.completedPhoto : ""}
+                                placeholder={currentKit?.completedPhoto ? currentKit.completedPhoto : "completed image URL"}
+                                onChange={(event) => {
+                                    if (currentKit) {
+                                        const currentKitCopy = { ...currentKit }
+                                        currentKitCopy.completedPhoto = event.target.value
+                                        setCurrentKit(currentKitCopy)
+                                    } else {
+                                        const kitCopy = { ...kit }
+                                        kitCopy.completedPhoto = event.target.value
+                                        setKit(kitCopy)
+                                    }
+                                }}
+                            />
+                        </div>
+                    </fieldset>
+                </fieldset>
             </form>
-
             <div className="form-group">
                 <button className="form-btn btn-primary"
                     onClick={handleSave}
