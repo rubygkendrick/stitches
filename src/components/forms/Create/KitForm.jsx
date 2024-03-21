@@ -56,7 +56,7 @@ export const KitForm = ({ currentUser }) => {
     useEffect(() => {
 
         if (!hasImportedKitStitches) {
-            if (currentKit.kitStitches) {
+            if (currentKit?.kitStitches) {
                 const updatedKitStitchIds = currentKit?.kitStitches?.map(kitStitch => kitStitch.stitchId)
                 setCurrentKitStitchIds(updatedKitStitchIds)
                 setPreviousStitches(updatedKitStitchIds)
@@ -306,7 +306,7 @@ export const KitForm = ({ currentUser }) => {
                                         type="checkbox"
                                         value={stitchObject.id}
                                         checked={
-                                            currentKitStitchIds ? currentKitStitchIds?.includes(stitchObject.id) :
+                                            currentKit? currentKitStitchIds?.includes(stitchObject.id) :
                                                 newKitStitchIds.includes(stitchObject.id)
                                         }
                                         onChange={handleCheckBoxChange}
