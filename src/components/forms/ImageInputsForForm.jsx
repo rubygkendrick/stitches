@@ -1,6 +1,6 @@
 import "./forms.css"
 
- const imageInputsForForm = ({currentKit , setCurrentKit , setKit , kit }) => {
+export const ImageInputsForForm = ({currentKit , setCurrentKit , setKit , kit }) => {
 
     return (
         <fieldset>
@@ -48,4 +48,3 @@ import "./forms.css"
     )
 }
 
-export default imageInputsForForm

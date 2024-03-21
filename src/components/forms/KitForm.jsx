@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import "../forms.css"
-import { createNewKit, createNewKitStitch, deleteKit, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../../services/kitService"
+import "./forms.css"
+import { createNewKit, createNewKitStitch, deleteKit, deleteKitStitch, editKit, getAllKitStitches, getAllStitches, getKitByKitId } from "../../services/kitService"
 import { useNavigate, useParams } from "react-router-dom"
+import { ImageInputsForForm } from "./ImageInputsForForm"
+import { NotesInputForForm } from "./NotesInputForForm"
 
 export const KitForm = ({ currentUser }) => {
     const navigate = useNavigate()
@@ -392,69 +394,8 @@ export const KitForm = ({ currentUser }) => {
                         </select>
                     </div>
                 </fieldset>
-                <fieldset>
-                    <div className="form-group">
-                        <textarea
-                            type="text"
-                            className="form-control-larger"
-                            defaultValue={currentKit?.notes ? currentKit.notes : ""}
-                            placeholder={currentKit?.notes ? currentKit.notes : "notes"}
-                            onChange={(event) => {
-                                if (currentKit) {
-                                    const currentKitCopy = { ...currentKit }
-                                    currentKitCopy.notes = event.target.value
-                                    setCurrentKit(currentKitCopy)
-                                } else {
-                                    const kitCopy = { ...kit }
-                                    kitCopy.notes = event.target.value
-                                    setKit(kitCopy)
-                                }
-                            }}
-                        />
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">
-                        <textarea
-                            type="text"
-                            className="photoInput"
-                            defaultValue={currentKit?.pattern ? currentKit.pattern : ""}
-                            placeholder={currentKit?.pattern ? currentKit.pattern : "pattern image URL"}
-                            onChange={(event) => {
-                                if (currentKit) {
-                                    const currentKitCopy = { ...currentKit }
-                                    currentKitCopy.pattern = event.target.value
-                                    setCurrentKit(currentKitCopy)
-                                } else {
-                                    const kitCopy = { ...kit }
-                                    kitCopy.pattern = event.target.value
-                                    setKit(kitCopy)
-                                }
-                            }}
-                        />
-                    </div>
-                    <fieldset>
-                        <div className="form-group">
-                            <textarea
-                                type="text"
-                                className="photoInput"
-                                defaultValue={currentKit?.completedPhoto ? currentKit.completedPhoto : ""}
-                                placeholder={currentKit?.completedPhoto ? currentKit.completedPhoto : "completed image URL"}
-                                onChange={(event) => {
-                                    if (currentKit) {
-                                        const currentKitCopy = { ...currentKit }
-                                        currentKitCopy.completedPhoto = event.target.value
-                                        setCurrentKit(currentKitCopy)
-                                    } else {
-                                        const kitCopy = { ...kit }
-                                        kitCopy.completedPhoto = event.target.value
-                                        setKit(kitCopy)
-                                    }
-                                }}
-                            />
-                        </div>
-                    </fieldset>
-                </fieldset>
+                <NotesInputForForm currentKit={currentKit} setCurrentKit={setCurrentKit} kit={kit} setKit={setKit} />
+                <ImageInputsForForm currentKit={currentKit} setCurrentKit={setCurrentKit} kit={kit} setKit={setKit} />
             </form>
             <div className="form-group">
                 <button className="form-btn btn-primary"
