@@ -18,7 +18,7 @@ export const Register = (props) => {
           "honey_user",
           JSON.stringify({
             id: createdUser.id,
-           
+
           })
         )
 
@@ -48,9 +48,10 @@ export const Register = (props) => {
 
   return (
     <main style={{ textAlign: "center" }}>
-        <h1 className="logo">Stitches</h1>
+      <img src="src/images/stitcheslogo.png" alt="stitches logo"
+        className="stitchesImage logo" />
       <form className="form-login" >
-        
+
         <h2>Register</h2>
         <fieldset>
           <div className="form-group">
@@ -77,17 +78,17 @@ export const Register = (props) => {
             />
           </div>
         </fieldset>
-      
+
       </form>
       <fieldset>
-          <div className="form-group">
-            <button className="login-btn btn-primary" 
+        <div className="form-group">
+          <button className="login-btn btn-primary"
             type="submit"
             onClick={handleRegister}>
-              Let's Stitch
-            </button>
-          </div>
-        </fieldset>
+            Let's Stitch
+          </button>
+        </div>
+      </fieldset>
     </main>
   )
 }

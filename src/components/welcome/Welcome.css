@@ -23,4 +23,7 @@
     color: var(--dark);
   }
   
- 
+ .stitchesImage {
+  width: 25.54rem;
+  height: 6.66rem;
+ }

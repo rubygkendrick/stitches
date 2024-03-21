@@ -32,7 +32,8 @@ export const Login = () => {
 
     return (
         <main className="container-login">
-            <h1 className="logo">Stitches</h1>
+            <img src="src/images/stitcheslogo.png" alt="stitches logo"
+            className="stitchesImage logo"/>
             <section>
                 <form className="form-login" onSubmit={handleLogin}>
                     <h2>Login</h2>
