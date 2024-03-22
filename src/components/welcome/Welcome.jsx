@@ -7,7 +7,7 @@ export const Welcome = () => {
         <>
             
             <img src="src/images/stitcheslogo.png" alt="stitches logo"
-            className="stitchesImage logo"/>
+            className="logo"/>
             <div className="welcome-container">
                 <h1><span>Embroidery Made Easy</span></h1>
                 <h2><span>Design, Save, Share with Stitches!</span></h2>

@@ -27,7 +27,7 @@ export const ProfileCurrentUser = ({ currentUser }) => {
     return <>
         
         <img src="src/images/stitcheslogo.png" alt="stitches logo"
-            className="stitchesImage logo"/>
+            className=" logo"/>
         <div className="profile-container">
             <h1>{userProfileInfo?.fullName}</h1>
             {userProfileInfo?.skillLevelId === 1 ?

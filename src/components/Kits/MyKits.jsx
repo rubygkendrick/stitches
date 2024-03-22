@@ -27,7 +27,9 @@ export const MyKits = ({ currentUser }) => {
         <div className="kitsMain-container">
             {myKits.map((kit) => (
                 <div key={kit.id} className="kit-container">
-                    <Link to={`/kitDetails/${kit.id}`} ><h2>{kit.title}</h2></Link>
+                    <Link to={`/kitDetails/${kit.id}`} >
+                        <h2 className="kit-title">{kit.title}</h2>
+                    </Link>
 
                     {kit.completedPhoto ? (
                         <img

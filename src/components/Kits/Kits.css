@@ -24,4 +24,10 @@
     align-self: center;
     border: 1px solid var(--outline);
     border-radius: 15px;
+    object-fit: cover;
+}
+
+.kit-title:hover{
+    transform: scale(1.1);
+    transition: transform 0.3s;
 }

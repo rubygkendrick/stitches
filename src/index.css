@@ -80,10 +80,14 @@ button {
 /* If you change the color variables, be sure to change the hover colors to be a darker shade of the colors you chose*/
 .btn-primary {
   background-color: black;
+  transition: transform 0.3s;
+  
 }
 
 .btn-primary:hover {
   background-color: #8937aa;
+  transform: scale(1.05);
+  
 }
 
 .btn-secondary {
@@ -125,4 +129,5 @@ button {
 
 a:hover {
  color: #be6bdf;
+ transform: scale(1.1);
 }

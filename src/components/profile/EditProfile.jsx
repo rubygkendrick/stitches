@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { editUser, getAllUsers } from "../../services/userService"
 import "./Profile.css"
 import { useEffect, useState } from "react"
+import stitcheslogo from "../../images/stitcheslogo.png"
 
 export const EditProfile = ({ currentUser }) => {
     const { userId } = useParams()
@@ -29,10 +30,13 @@ export const EditProfile = ({ currentUser }) => {
     if (currentUser.id == userId) {
 
         return <>
-            <h1 className="logo">Stitches</h1>
+
+            <img src={stitcheslogo} alt="stitches logo"
+                className="logo" />
+
             <div className="profile-container">
                 <input className="profile-input"
-                    
+
                     placeholder={userProfileInfo?.fullName}
                     onChange={(event) => {
                         const editedProfileInfoCopy = { ...userProfileInfo }
@@ -42,7 +46,7 @@ export const EditProfile = ({ currentUser }) => {
                 ></input>
                 <input className="profile-input"
                     placeholder={userProfileInfo?.email}
-                    
+
                     onChange={(event) => {
                         const editedProfileInfoCopy = { ...userProfileInfo }
                         editedProfileInfoCopy.email = event.target.value
@@ -50,7 +54,7 @@ export const EditProfile = ({ currentUser }) => {
                     }}></input>
 
                 <select className="profile-input" value={userProfileInfo.skillLevelId} selected
-                    
+
                     onChange={(event) => {
                         const editedProfileInfoCopy = { ...userProfileInfo }
                         editedProfileInfoCopy.skillLevelId = event.target.value
@@ -66,7 +70,7 @@ export const EditProfile = ({ currentUser }) => {
             </div>
             <Link to="/Profile">
                 <button className="btn-primary"
-                onClick={handleProfileSave}
+                    onClick={handleProfileSave}
                 >Save</button>
             </Link>
         </>
