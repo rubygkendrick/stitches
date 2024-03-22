@@ -2,9 +2,12 @@ import { Link } from "react-router-dom"
 import "./Welcome.css"
 
 export const Welcome = () => {
+
     return (
         <>
-            <h1 className="logo">Stitches</h1>
+            
+            <img src="src/images/stitcheslogo.png" alt="stitches logo"
+            className="logo"/>
             <div className="welcome-container">
                 <h1><span>Embroidery Made Easy</span></h1>
                 <h2><span>Design, Save, Share with Stitches!</span></h2>
@@ -14,6 +17,7 @@ export const Welcome = () => {
                     <button className="btn-primary">Create A Kit</button>
                 </Link>
             </div>
+            
         </>
     )
 }

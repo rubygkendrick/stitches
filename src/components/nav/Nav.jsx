@@ -7,7 +7,12 @@ export const Nav = () => {
     return (
         <ul className="navbar">
             <li className="navbar-item">
-                <Link to="/">Stitches</Link>
+                <Link to="/">
+                    <div className="navbar-logo-container">
+                        <img src="src/images/stitcheslogo.png" alt="stitches logo"
+                            className="navBarImage" />
+                    </div>
+                </Link>
             </li>
             <li className="navbar-item">
                 <Link to="/kits">Kits</Link>
@@ -22,9 +27,9 @@ export const Nav = () => {
                 <Link to="/favorites">Favorites</Link>
             </li>
             <div className="logout-profile-container">
-            <li className="navbar-item-nested navbar-item">
-                <Link to="/profile">Profile</Link>
-            </li>
+                <li className="navbar-item-nested navbar-item">
+                    <Link to="/profile">Profile</Link>
+                </li>
                 {localStorage.getItem("honey_user") ? (
                     <li className=" navbar-item-nested navbar-item navbar-logout">
                         <Link

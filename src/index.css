@@ -12,11 +12,11 @@ font-family: "Roboto", sans-serif;
 :root {
   --primary: #d1d1d1;
   --secondary: #e9e9e9;
-  --info: #b0b1b0;
+  --info: black;
   --warning: #efb814;
   --white: #ffffff;
   --offWhite: #fafafa;
-  --dark: #d1d1d1;
+  --dark: #8a8a8a;
   --outline: #b0b1b0;
 
   --appBackground: #f2f2f3;
@@ -80,10 +80,14 @@ button {
 /* If you change the color variables, be sure to change the hover colors to be a darker shade of the colors you chose*/
 .btn-primary {
   background-color: black;
+  transition: transform 0.3s;
+  
 }
 
 .btn-primary:hover {
-  background-color: #999999;
+  background-color: #8937aa;
+  transform: scale(1.05);
+  
 }
 
 .btn-secondary {
@@ -91,7 +95,7 @@ button {
 }
 
 .btn-secondary:hover {
-  background-color: #999999;
+  background-color: #8937aa;
 }
 
 .btn-warning {
@@ -99,7 +103,7 @@ button {
 }
 
 .btn-warning:hover {
-  background-color: #999999;
+  background-color: #8937aa;
 }
 
 .btn-info {
@@ -107,14 +111,14 @@ button {
 }
 
 .btn-info:hover {
-  background-color: #999999
+  background-color: #8937aa;
 }
 
 .logo {
   margin: 4rem auto;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   color:black;
-  width: 20%;
+  width: 25rem;
   text-align: center;
   padding: 1rem;
   border: 1px solid var(--outline);
@@ -124,5 +128,6 @@ button {
 }
 
 a:hover {
- color: #999999;
+ color: #be6bdf;
+ transform: scale(1.1);
 }
