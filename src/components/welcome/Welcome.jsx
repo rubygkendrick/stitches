@@ -5,7 +5,6 @@ export const Welcome = () => {
 
     return (
         <>
-            
             <img src="src/images/stitcheslogo.png" alt="stitches logo"
             className="logo"/>
             <div className="welcome-container">
@@ -16,8 +15,7 @@ export const Welcome = () => {
                 <Link to="createKit">
                     <button className="btn-primary">Create A Kit</button>
                 </Link>
-            </div>
-            
+            </div>           
         </>
     )
 }
