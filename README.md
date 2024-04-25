@@ -36,6 +36,30 @@ npm run dev
 ```
 Then navigate to http://localhost:8088
 
+## Essential Structure
+Stitches consists of several key features:
+#### Creating a New Kit
+From the Create a Kit View, you can:
+- Add a new kit to your library
+#### Editing an Existing Kit
+As an author of a kit you can:
+- Edit an exisiting kits details
+#### Add Kits to Your Favorites
+From the All Kits View:
+- View Kit Details of other user's kits
+- Add those kits to your Favorites tab to save for later 
+#### Remove Kits from Your Favorites
+From the Kit Details view you can:
+- Remove a kit from your favorites
+#### Browse All of the Kits
+From the All Kits view you can:
+- View all of the Kits from all of the Users
+- Click on a specific kit to view its details and add it to favorites
+#### Edit Profile Information
+From the Profile View you can:
+- edit your name, email, and skill level
+
+
 ## Wireframe
 [Project Wireframe](https://miro.com/app/board/uXjVNj-xYNI=/?moveToWidget=3458764581599684756&cot=14)
 
@@ -66,4 +90,4 @@ In this capstone project, I was able to implement CRUD functionality, navigation
 
 My primary challenge was properly handling how to build up layers of dependant information over multiple renders, useEffects, and fetch calls. Managing State with checkboxes was also challenging. 
 
-I plan to eventually implement a color picker window for creating a new kit, and color boxes to display the colors for each kit, as opposed to displaying the hex codes. 
+I plan to eventually implement a color picker window for creating a new kit, and color boxes to display the colors for each kit, as opposed to displaying the hex codes. I would also love to add a filter bar to the All Kits view so that users can view kits with specific stitches and key words in the description. 
